@@ -8,5 +8,5 @@ sealed class Dest {
     data object Home : Dest()
 
     @Serializable
-    data object Profile : Dest()
+    data class Profile(val name: String, val age: Int) : Dest()
 }

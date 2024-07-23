@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 
 
 @Composable
-fun Home(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun HomeScreen(modifier: Modifier = Modifier, onClick: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(text = "Welcome to home screen", modifier = Modifier.clickable { onClick.invoke() })
 
@@ -20,9 +20,11 @@ fun Home(modifier: Modifier = Modifier, onClick: () -> Unit) {
 
 
 @Composable
-fun Profile(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun ProfileScreen(profile: Dest.Profile, onClick: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Welcome to Profile screen", modifier = Modifier.clickable { onClick.invoke() })
+        Text(
+            text = "Welcome to Profile screen ${profile.name} ${profile.age}",
+            modifier = Modifier.clickable { onClick.invoke() })
 
     }
 
