@@ -22,12 +22,20 @@ fun HomeScreen(modifier: Modifier = Modifier, onClick: () -> Unit) {
 @Composable
 fun ProfileScreen(profile: Dest.Profile, onClick: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(
-            text = "Welcome to Profile screen ${profile.name} ${profile.age}",
+        Text(text = "Welcome to Profile screen ${profile.dummy.name} ${profile.dummy.age}",
             modifier = Modifier.clickable { onClick.invoke() })
 
     }
 
 }
+
+
+
+
+
+
+
+
+
 
 
