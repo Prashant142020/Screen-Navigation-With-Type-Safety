@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
                         MainNavigation()
 
                     }
+
                 }
             }
         }
@@ -41,5 +42,8 @@ private fun MainNavigationPreview() {
     MainNavigation()
 
 }
+
+
+
 
 

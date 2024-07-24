@@ -10,16 +10,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlin.reflect.KClass
 import kotlin.reflect.typeOf
 
 @Parcelize
 @Serializable
 data class Dummy(
-    val name: String,
-    val age: Int
+    val name: String, val age: Int
 ) : Parcelable
 
 val DummyType = object : NavType<Dummy>(
@@ -32,6 +33,7 @@ val DummyType = object : NavType<Dummy>(
             bundle.getParcelable(key)
         }
     }
+
 
     override fun parseValue(value: String): Dummy {
         return Json.decodeFromString(value)
@@ -46,6 +48,33 @@ val DummyType = object : NavType<Dummy>(
     }
 }
 
+
+class CustomNavType<T : Parcelable>(
+    private val clazz: KClass<T>, private val serializable: KSerializer<T>
+) : NavType<T>(
+    false
+) {
+    override fun get(bundle: Bundle, key: String): T? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            bundle.getParcelable(key, clazz.java)
+        } else {
+            bundle.getParcelable(key)
+        }
+    }
+
+    override fun parseValue(value: String): T {
+        return Json.decodeFromString(serializable, value)
+    }
+
+    override fun put(bundle: Bundle, key: String, value: T) {
+        bundle.putParcelable(key, value)
+    }
+
+    override fun serializeAsValue(value: T): String {
+        return Json.encodeToString(serializable, value)
+    }
+}
+
 @Composable
 fun MainNavigation() {
     val navController = rememberNavController()
@@ -56,7 +85,12 @@ fun MainNavigation() {
             }
         }
         composable<Dest.Profile>(
-            typeMap = mapOf(typeOf<Dummy>() to DummyType)
+            typeMap = mapOf(
+                typeOf<Dummy>() to CustomNavType<Dummy>(
+                    Dummy::class, Dummy.serializer()
+                )
+
+            )
         ) {
             val profile = it.toRoute<Dest.Profile>()
             ProfileScreen(profile) {
@@ -65,5 +99,7 @@ fun MainNavigation() {
         }
     }
 }
+
+
 
 

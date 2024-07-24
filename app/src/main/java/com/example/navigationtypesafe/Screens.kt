@@ -15,7 +15,6 @@ fun HomeScreen(modifier: Modifier = Modifier, onClick: () -> Unit) {
         Text(text = "Welcome to home screen", modifier = Modifier.clickable { onClick.invoke() })
 
     }
-
 }
 
 
@@ -26,7 +25,6 @@ fun ProfileScreen(profile: Dest.Profile, onClick: () -> Unit) {
             modifier = Modifier.clickable { onClick.invoke() })
 
     }
-
 }
 
 
