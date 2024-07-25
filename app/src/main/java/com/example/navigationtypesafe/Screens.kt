@@ -10,24 +10,39 @@ import androidx.compose.ui.Modifier
 
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun AuthFirst(modifier: Modifier = Modifier, onClick: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Welcome to home screen", modifier = Modifier.clickable { onClick.invoke() })
+        Text(text = "Auth first Screen", modifier = Modifier.clickable { onClick.invoke() })
 
     }
 }
 
 
 @Composable
-fun ProfileScreen(profile: Dest.Profile, onClick: () -> Unit) {
+fun AuthSecond(modifier: Modifier = Modifier, onClick: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Welcome to Profile screen ${profile.dummy.name} ${profile.dummy.age}",
-            modifier = Modifier.clickable { onClick.invoke() })
+        Text(text = "Auth Second Screen", modifier = Modifier.clickable { onClick.invoke() })
 
     }
 }
 
 
+@Composable
+fun DashFirst(modifier: Modifier = Modifier, onClick: () -> Unit) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Text(text = "Dash First Screen", modifier = Modifier.clickable { onClick.invoke() })
+
+    }
+}
+
+
+@Composable
+fun DashSecond(modifier: Modifier = Modifier, onClick: () -> Unit) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Text(text = "Dash Second Screen", modifier = Modifier.clickable { onClick.invoke() })
+
+    }
+}
 
 
 
